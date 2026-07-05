@@ -1,66 +1,265 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>FPS Mobile — by Tytialo</title>
-  <meta name="description" content="Mainkan FPS Mobile Game by Tytialo" />
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
-  
-  <!-- Favicon (opsional) -->
-  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>ASTER : NO SIGNAL</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- BabylonJS -->
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+
 </head>
+
 <body>
-  <!-- Menu awal -->
-  <div id="menu">
-    <img src="assets/images/logo.png" alt="Logo" class="logo" />
-    <h1>🔫 FPS MOBILE 🔫</h1>
-    <p>by Tytialo</p>
-    <button id="mulaiBtn">MULAI MAIN</button>
-  </div>
 
-  <!-- Canvas game -->
-  <canvas id="game-canvas"></canvas>
+<!-- Loading Screen -->
+<div id="loadingScreen">
 
-  <!-- HUD -->
-  <div id="hud">
-    <div class="health-container">
-      <span>❤️</span>
-      <div class="health-bar">
-        <div class="health-fill" id="healthFill"></div>
-      </div>
+    <h1>ASTER</h1>
+    <h2>NO SIGNAL</h2>
+
+    <div class="loadingBar">
+        <div id="progress"></div>
     </div>
-    <div class="ammo" id="ammoDisplay">30 / 90</div>
-  </div>
 
-  <!-- Kontrol -->
-  <div id="controls">
-    <div class="joystick-area" id="joystickBase">
-      <div class="joystick-knob" id="joystickKnob"></div>
+    <p id="loadingText">Loading...</p>
+
+</div>
+
+<!-- Main Menu -->
+<div id="mainMenu" class="hidden">
+
+    <div class="logo">
+
+        <h1>ASTER</h1>
+
+        <h3>NO SIGNAL</h3>
+
     </div>
-    <div class="fire-button" id="fireBtn">🔫</div>
-  </div>
 
-  <!-- Hit marker -->
-  <div id="hitmarker">✚</div>
+    <div class="menu">
 
-  <!-- Audio elements -->
-  <audio id="sfxTembak" preload="auto" style="display: none;">
-    <source src="assets/sounds/tembak.mp3" type="audio/mpeg" />
-  </audio>
-  <audio id="sfxKena" preload="auto" style="display: none;">
-    <source src="assets/sounds/kena.mp3" type="audio/mpeg" />
-  </audio>
-  <audio id="sfxKosong" preload="auto" style="display: none;">
-    <source src="assets/sounds/kosong.mp3" type="audio/mpeg" />
-  </audio>
+        <button id="continueBtn">
+            Continue
+        </button>
 
-  <!-- Three.js Library -->
-  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
-  
-  <!-- Game Logic -->
-  <script src="game.js"></script>
+        <button id="newGameBtn">
+            New Game
+        </button>
+
+        <button id="settingsBtn">
+            Settings
+        </button>
+
+        <button id="creditsBtn">
+            Credits
+        </button>
+
+        <button id="exitBtn">
+            Exit
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Settings -->
+
+<div id="settingsMenu" class="hidden">
+
+<h2>SETTINGS</h2>
+
+<div class="section">
+
+<h3>Graphics</h3>
+
+<label>
+
+Graphics Quality
+
+<select id="quality">
+
+<option>Low</option>
+
+<option>Medium</option>
+
+<option selected>High</option>
+
+<option>Ultra</option>
+
+</select>
+
+</label>
+
+<label>
+
+FPS Limit
+
+<select id="fps">
+
+<option>30</option>
+
+<option selected>60</option>
+
+<option>90</option>
+
+<option>120</option>
+
+</select>
+
+</label>
+
+<label>
+
+Bloom
+
+<input type="checkbox" checked>
+
+</label>
+
+<label>
+
+Shadow
+
+<input type="checkbox" checked>
+
+</label>
+
+<label>
+
+HDR
+
+<input type="checkbox" checked>
+
+</label>
+
+</div>
+
+<div class="section">
+
+<h3>Audio</h3>
+
+<label>Master
+<input type="range" value="100">
+</label>
+
+<label>Music
+<input type="range" value="80">
+</label>
+
+<label>Effects
+<input type="range" value="90">
+</label>
+
+<label>Voice
+<input type="range" value="100">
+</label>
+
+</div>
+
+<div class="section">
+
+<h3>Controls</h3>
+
+<label>
+
+Sensitivity
+
+<input type="range"
+min="1"
+max="100"
+value="50">
+
+</label>
+
+<label>
+
+Gyroscope
+
+<input type="checkbox">
+
+</label>
+
+<label>
+
+Auto Sprint
+
+<input type="checkbox">
+
+</label>
+
+<label>
+
+Auto Fire
+
+<input type="checkbox">
+
+</label>
+
+</div>
+
+<button id="saveSettings">
+
+SAVE
+
+</button>
+
+<button id="backMenu">
+
+BACK
+
+</button>
+
+</div>
+
+<!-- Credits -->
+
+<div id="creditsMenu" class="hidden">
+
+<h1>ASTER</h1>
+
+<p>Version 0.1 Alpha</p>
+
+<p>Made By Bintang</p>
+
+<p>Powered by Babylon.js</p>
+
+<button id="creditsBack">
+
+BACK
+
+</button>
+
+</div>
+
+<!-- HUD -->
+
+<div id="hud" class="hidden">
+
+<div id="fpsCounter">
+
+FPS : 60
+
+</div>
+
+<div id="crosshair">
+
++
+
+</div>
+
+</div>
+
+<!-- Canvas -->
+
+<canvas id="renderCanvas"></canvas>
+
+<script src="main.js"></script>
+
 </body>
-  </html>
+</html>
